@@ -1,15 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Krithika, Be My Valentine?</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffccd5, #ffe6f0);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      color: #b30059;
+      font-size: 2.5em;
+      margin: 10px;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 12px 25px;
+      margin: 15px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    #yesBtn {
+      background-color: #ff4d88;
+      color: white;
+      z-index: 2;
+    }
+
+    #noBtn {
+      background-color: #555;
+      color: white;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Krithika 💖</h1>
+<h1>Will you be my Valentine?</h1>
+
+<button id="yesBtn" onclick="sayYes()">Yes 😌</button>
+<button id="noBtn" onmouseover="moveNo()">No 🙃</button>
+
 <script>
-let clickedOnce = false;
+let moved = false;
 
 function moveNo() {
-  if (clickedOnce) return;
+  if (moved) return;
+
+  moved = true;
 
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
 
-  clickedOnce = true;
-
-  // Move once dramatically
+  // Move once
   const maxX = window.innerWidth - noBtn.offsetWidth;
   const maxY = window.innerHeight - noBtn.offsetHeight;
 
@@ -18,10 +87,10 @@ function moveNo() {
 
   noBtn.innerText = "Too slow 😌";
 
-  // Grow yes button instantly
+  // Grow Yes button
   yesBtn.style.transform = "scale(1.8)";
 
-  // Remove No button after 1 second
+  // Remove No after 1 second
   setTimeout(() => {
     noBtn.remove();
   }, 1000);
@@ -29,10 +98,11 @@ function moveNo() {
 
 function sayYes() {
   document.body.innerHTML = `
-    <h1 style="color:#b30059;">You didn’t really have a choice 😌💖</h1>
-    <p>Krithika, you are my favorite everything.</p>
-    <h2>Happy Valentine’s Day 💕</h2>
+    <h1 style="color:#b30059;">Best decision ever 💕</h1>
+    <p>Krithika, you make my world brighter every single day.</p>
+    <h2>Happy Valentine’s Day 💖</h2>
   `;
+
   setInterval(createHeart, 200);
 }
 
@@ -49,3 +119,6 @@ function createHeart() {
   }, 4000);
 }
 </script>
+
+</body>
+</html>
