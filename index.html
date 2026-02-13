@@ -1,115 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Krithika, Be My Valentine?</title>
-  <style>
-    body {
-      text-align: center;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffccd5, #ffe6f0);
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    h1 {
-      font-size: 2.8em;
-      color: #b30059;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.2em;
-      color: #333;
-    }
-
-    button {
-      font-size: 1.2em;
-      padding: 12px 25px;
-      margin: 10px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    #yesBtn {
-      background-color: #ff4d88;
-      color: white;
-    }
-
-    #yesBtn:hover {
-      transform: scale(1.1);
-    }
-
-    #noBtn {
-      background-color: #666;
-      color: white;
-      position: absolute;
-    }
-
-    .heart {
-      position: absolute;
-      color: red;
-      font-size: 24px;
-      animation: float 4s linear infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh); opacity: 1; }
-      100% { transform: translateY(-10vh); opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-
-<h1>Krithika 💖</h1>
-<p>I have one important question...</p>
-<h1>Will you be my Valentine? 💘</h1>
-
-<button id="yesBtn" onclick="sayYes()">Yes, obviously 😌</button>
-<button id="noBtn" onmouseover="moveNo()">No</button>
-
 <script>
-let noTexts = [
+let noMessages = [
   "Are you sure? 🥺",
-  "Think again 😳",
-  "Krithikaaaa 😭",
-  "You don't mean that...",
-  "Last chance 👀",
-  "Fine... click yes 😌"
+  "Really sure?? 😭",
+  "Krithikaaa don’t do this 😩",
+  "Think about it again 👀",
+  "Last warning 😌",
+  "You’re clicking wrong button 😏",
+  "Try again.",
+  "Still no??",
+  "This is getting awkward.",
+  "Okay now I’m hurt 💔",
+  "Fine. But why though?",
+  "You can’t win 😈"
 ];
 
 let clickCount = 0;
 
 function moveNo() {
   const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+
   const x = Math.random() * (window.innerWidth - 100);
   const y = Math.random() * (window.innerHeight - 50);
 
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 
-  if (clickCount < noTexts.length) {
-    noBtn.innerText = noTexts[clickCount];
-    clickCount++;
-  }
+  noBtn.innerText = noMessages[clickCount % noMessages.length];
 
-  const yesBtn = document.getElementById("yesBtn");
-  yesBtn.style.transform = "scale(" + (1 + clickCount * 0.1) + ")";
+  clickCount++;
+
+  // Yes button grows aggressively
+  yesBtn.style.transform = "scale(" + (1 + clickCount * 0.15) + ")";
+
+  // After 15 attempts, remove No completely
+  if (clickCount > 15) {
+    noBtn.remove();
+  }
 }
 
 function sayYes() {
   document.body.innerHTML = `
     <h1 style="color:#b30059;">You just made me the happiest person alive 💕</h1>
-    <p>I promise to annoy you, support you, and love you endlessly, Krithika.</p>
+    <p>Krithika, you are my favorite notification and my best decision.</p>
     <h2>Happy Valentine’s Day 💖</h2>
   `;
 
-  setInterval(createHeart, 300);
+  setInterval(createHeart, 200);
 }
 
 function createHeart() {
@@ -125,6 +62,3 @@ function createHeart() {
   }, 4000);
 }
 </script>
-
-</body>
-</html>
