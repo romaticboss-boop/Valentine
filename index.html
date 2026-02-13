@@ -77,7 +77,7 @@
 <button id="noBtn" onclick="handleNo()">No 😅</button>
 
 <script>
-const text = "From the day you came into my life, everything started feeling softer, warmer, brighter. I don't just want a Valentine. I want you. 💕";
+const text = "From the day you came into my life, everything felt softer, warmer, brighter. I don’t just want a Valentine… I want you. 💕";
 let i = 0;
 
 const audio = new Audio("perfect.mp3");
@@ -92,8 +92,38 @@ function typeText() {
 
 window.onload = typeText;
 
+let noClickCount = 0;
+
 function handleNo() {
-  document.getElementById("noBtn").innerText = "Are you really sure? 🥺";
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+
+  noClickCount++;
+
+  if (noClickCount === 1) {
+    noBtn.innerText = "Are you really sure? 🥺";
+  }
+  else if (noClickCount === 2) {
+    noBtn.innerText = "I'll be very sad... 😔";
+  }
+  else if (noClickCount === 3) {
+    noBtn.innerText = "This hurts 😢";
+    noBtn.style.opacity = "0.6";
+  }
+  else if (noClickCount === 4) {
+    noBtn.innerText = "Okay fine 😭";
+    noBtn.style.opacity = "0.4";
+
+    setTimeout(() => {
+      noBtn.style.transition = "opacity 1s";
+      noBtn.style.opacity = "0";
+    }, 500);
+
+    setTimeout(() => {
+      noBtn.remove();
+      yesBtn.style.transform = "scale(1.2)";
+    }, 1500);
+  }
 }
 
 function sayYes() {
