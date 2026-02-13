@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Krithika, Be My Valentine?</title>
+  <title>Krithika ❤️</title>
   <meta charset="UTF-8">
   <style>
     body {
       margin: 0;
       height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffccd5, #ffe6f0);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
+      font-size: 2.8em;
       color: #b30059;
-      font-size: 2.5em;
-      margin: 10px;
+      margin-bottom: 10px;
     }
 
-    .button-container {
-      position: relative;
-      width: 400px;
-      height: 200px;
+    #message {
+      font-size: 1.3em;
+      color: #333;
+      max-width: 600px;
+      margin-bottom: 30px;
+      min-height: 60px;
     }
 
     button {
       font-size: 1.2em;
-      padding: 12px 25px;
+      padding: 12px 28px;
+      margin: 10px;
       border: none;
       border-radius: 30px;
       cursor: pointer;
@@ -41,22 +44,21 @@
     #yesBtn {
       background-color: #ff4d88;
       color: white;
-      position: relative;
-      z-index: 2;
+      box-shadow: 0 0 15px rgba(255, 77, 136, 0.6);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
     }
 
     #noBtn {
       background-color: #555;
       color: white;
-      position: absolute;
-      left: 200px;
-      top: 0px;
-      z-index: 3;
     }
 
     .heart {
       position: absolute;
-      font-size: 24px;
+      font-size: 22px;
       animation: float 4s linear infinite;
     }
 
@@ -69,64 +71,49 @@
 <body>
 
 <h1>Krithika 💖</h1>
-<h1>Will you be my Valentine?</h1>
+<div id="message"></div>
 
-<div class="button-container">
-  <button id="yesBtn" onclick="sayYes()">Yes 😌</button>
-  <button id="noBtn" onclick="handleNo()">No 🙃</button>
-</div>
+<button id="yesBtn" onclick="sayYes()">Yes, always ❤️</button>
+<button id="noBtn" onclick="handleNo()">No 😅</button>
 
 <script>
-let firstMoveDone = false;
-let scaleSize = 1;
+const text = "From the day you came into my life, everything started feeling softer, warmer, brighter. I don't just want a Valentine. I want you. 💕";
+let i = 0;
+
+const audio = new Audio("perfect.mp3");
+
+function typeText() {
+  if (i < text.length) {
+    document.getElementById("message").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeText, 40);
+  }
+}
+
+window.onload = typeText;
 
 function handleNo() {
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const container = document.querySelector(".button-container");
-
-  const maxX = container.clientWidth - noBtn.offsetWidth;
-  const maxY = container.clientHeight - noBtn.offsetHeight;
-
-  // First click: move inside container
-  if (!firstMoveDone) {
-    firstMoveDone = true;
-
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-
-    noBtn.innerText = "Wait what 😳";
-    yesBtn.style.transform = "scale(1.3)";
-    return;
-  }
-
-  // After first click: shrink
-  scaleSize -= 0.15;
-
-  if (scaleSize <= 0.3) {
-    scaleSize = 0.3;
-    noBtn.innerText = "Okay fine 😭";
-  }
-
-  noBtn.style.transform = "scale(" + scaleSize + ")";
+  document.getElementById("noBtn").innerText = "Are you really sure? 🥺";
 }
 
 function sayYes() {
+  audio.play();
+
   document.body.innerHTML = `
-    <h1 style="color:#b30059;">Best decision ever 💕</h1>
-    <p>Krithika, you make my world brighter every single day.</p>
-    <h2>Happy Valentine’s Day 💖</h2>
+    <h1>You just made me the happiest person alive 💖</h1>
+    <p style="font-size:1.4em;">I promise to choose you, support you, and love you every single day.</p>
+    <h2>Happy Valentine’s Day, Krithika ❤️</h2>
   `;
 
-  setInterval(createHeart, 200);
+  setInterval(createHeart, 150);
 }
 
 function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
-  heart.innerHTML = "💖";
+  heart.innerHTML = "💗";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 30 + 20 + "px";
+  heart.style.fontSize = Math.random() * 25 + 15 + "px";
   document.body.appendChild(heart);
 
   setTimeout(() => {
