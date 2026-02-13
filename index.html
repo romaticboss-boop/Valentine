@@ -66,6 +66,15 @@
       0% { transform: translateY(100vh); opacity: 1; }
       100% { transform: translateY(-10vh); opacity: 0; }
     }
+
+    .finalMessage {
+      font-size: 1.5em;
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      color: #800040;
+      max-width: 700px;
+    }
   </style>
 </head>
 <body>
@@ -132,10 +141,16 @@ function sayYes() {
   document.body.innerHTML = `
     <h1>You just made me the happiest person alive 💖</h1>
     <p style="font-size:1.4em;">I promise to choose you, support you, and love you every single day.</p>
-    <h2>Happy Valentine’s Day, Krithika ❤️</h2>
+    <div class="finalMessage" id="finalText">
+      If I could choose again, in every lifetime… I would still choose you.
+    </div>
   `;
 
   setInterval(createHeart, 150);
+
+  setTimeout(() => {
+    document.getElementById("finalText").style.opacity = "1";
+  }, 10000); // 10 seconds after music starts
 }
 
 function createHeart() {
